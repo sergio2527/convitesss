@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite de Casamento Animado</title>
+
+<!-- Fontes elegantes -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/fotos.css" />
+
+</head>
+<body>
+
+<a href="index.html" class="voltar">Voltar</a>
+<button id="botaoMusica">🎵 Tocar Música</button>
+
+<div class="slideshow">
+  <!-- Slide 1 -->
+  <div class="slide active">
+    <img src="fotos/logo.jpeg" alt="Foto 1">
+    <div class="slide-text text-title" style="bottom:35%; animation-delay:0.5s;">Bem-vindos ao nosso evento!</div>
+    <div class="slide-text text-subtitle" style="bottom:25%; animation-delay:1.5s;">Prepare-se para celebrar o amor</div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide">
+    <img src="fotos/1.jpeg" alt="Foto 2">
+    <div class="slide-text text-title" style="bottom:30%; animation-delay:0.5s;">Julio ❤️ Ana Beatriz</div>
+    <div class="slide-text text-subtitle" style="bottom:20%; animation-delay:1.5s;">Uma história de amor inesquecível</div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide">
+    <img src="fotos/2.jpeg" alt="Foto 3">
+    <div class="slide-text text-subtitle" style="bottom:25%; animation-delay:0.5s;">📅 30 de novembro de 2025</div>
+    <div class="slide-text text-subtitle" style="bottom:15%; animation-delay:1.5s;">⏰ Às 14:30h</div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide">
+    <img src="fotos/3.jpeg" alt="Foto 4">
+    <div class="slide-text text-subtitle" style="bottom:25%; animation-delay:0.5s;">📍 Av. Luigi Giobi, S/n - Vila Camarim, Queimados </div>
+    <div class="slide-text text-subtitle" style="bottom:15%; animation-delay:1.5s;">Rio de Janeiro/RJ</div>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide">
+    <img src="fotos/4.jpeg" alt="Foto 5">
+    <div class="slide-text text-subtitle" style="bottom:25%; animation-delay:0.5s;">Venha celebrar conosco!</div>
+    <div class="slide-text text-subtitle" style="bottom:15%; animation-delay:1.5s;">Será um dia inesquecível</div>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide">
+    <img src="fotos/5.jpeg" alt="Foto 6">
+    <div class="slide-text text-subtitle" style="bottom:25%; animation-delay:0.5s;">Esperamos você!</div>
+    <div class="slide-text text-subtitle" style="bottom:15%; animation-delay:1.5s;">Não perca esse momento mágico</div>
+  </div>
+
+  <!-- Slide 7 -->
+  <div class="slide">
+    <img src="fotos/6.jpeg" alt="Foto 7">
+    <div class="slide-text text-subtitle" style="bottom:25%; animation-delay:0.5s;">Será inesquecível!</div>
+  </div>
+</div>
+
+<audio id="musica" loop>
+  <source src="audio/musica.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio.
+</audio>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let index = 0;
+
+function resetAnimations(slide) {
+  const texts = slide.querySelectorAll('.slide-text');
+  texts.forEach(t => {
+    t.style.opacity = 0;
+    t.style.animation = 'none';
+    void t.offsetWidth; // reinicia animação
+    t.style.animation = `slideIn 1s forwards`;
+    if(t.style.animationDelay) t.style.animation += ` ${t.style.animationDelay}`;
+  });
+}
+
+// Troca de slides
+setInterval(() => {
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
+  resetAnimations(slides[index]);
+}, 4000);
+
+const botao = document.getElementById('botaoMusica');
+const musica = document.getElementById('musica');
+botao.addEventListener('click', () => { musica.play(); botao.style.display = 'none'; });
+document.body.addEventListener('click', () => { if(musica.paused){ musica.play(); botao.style.display='none'; } }, {once:true});
+</script>
+
+</body>
+</html>
